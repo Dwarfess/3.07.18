@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {Image, List} from 'semantic-ui-react';
 
 import Search from './search';
+import {select} from '../actions/select';
 
 class ClientList extends Component {
     constructor(props){
@@ -25,15 +27,14 @@ class ClientList extends Component {
                     {
                         this.props.clients.filter(forFilter(text))
                             .map((client, index) => (
-                                <List.Item floated='left' key={index+1}>
+                                <List.Item floated='left' key={index+1} onClick={()=>this.props.select(client)}>
                                     <Image avatar src={client.general.avatar} />
                                     <List.Content>
                                         <List.Header>{client.general.firstName} {client.general.lastName}</List.Header>
                                         {client.job.title}
                                     </List.Content>
                                 </List.Item>
-                            )
-                        )
+                            ))
                     }
                 </List>
             </div>
@@ -51,4 +52,8 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(ClientList);
+function matchDispatchToProps(dispatch){
+    return bindActionCreators({select:select}, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(ClientList);

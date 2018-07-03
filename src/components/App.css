@@ -5,7 +5,23 @@ body {
   position: relative;
 }
 .container {
-  margin-top: 50px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+.clientInfo {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  position: fixed;
+  top: 40px;
+  left: 39%;
+  border: 1px solid #e2dbd2 !important;
+}
+.clientInfo .header {
+  font-size: 22px !important;
+}
+.image img {
+  width: 128px !important;
 }
 /*my mixings*/
 .after {
