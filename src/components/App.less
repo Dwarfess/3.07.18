@@ -1,0 +1,43 @@
+@firstColor:#465157;
+@secondColor:#3399cc;
+@thirdColor: #e2dbd2;
+
+body{
+  margin:0;
+  font:14px Arial;
+  color:@firstColor;
+  position:relative;
+}
+
+.container{
+  margin-top:50px;
+}
+
+/*my mixings*/
+.after{
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.divAbs(@top: 0; @left: 0){
+  position:absolute;
+  bottom:0;
+  left:0;
+  margin-top:@top;
+  margin-left:@left;
+}
+
+.bg(@url; @r: no-repeat; @s: cover; @a: scroll){
+  background: url(@url) @r top center @a;
+  -webkit-background-size: @s;
+  -moz-background-size: @s;
+  -o-background-size: @s;
+  background-size: @s;
+}
+
+.br(@font: 1px; @color: @thirdColor){
+  border:@font solid @color !important;
+}

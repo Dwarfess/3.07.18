@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  font: 14px Arial;
+  color: #465157;
+  position: relative;
+}
+.container {
+  margin-top: 50px;
+}
+/*my mixings*/
+.after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
