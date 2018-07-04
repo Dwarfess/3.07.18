@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 import {Image, List} from 'semantic-ui-react';
 
 import Search from './search';
 import {select} from '../actions/select';
+import {httpGet} from '../actions/http-get';
 
 class ClientList extends Component {
     constructor(props){
@@ -14,12 +16,29 @@ class ClientList extends Component {
         this.state = {text:''};
     }
 
+    componentWillMount(){
+        console.log('componentWillMount start');
+        let that = this.props;
+        that.httpGet([])
+
+        axios.get('/clients.json').then(function (response) {
+            that.httpGet(response.data)
+            console.log(that.httpGet(response.data));
+        }).catch(function (error) {
+            that.getClients(null)
+            console.log(error);
+        });
+        
+        console.log('componentWillMount end');
+    }
+
     search(text){
         this.setState({text:text});
     }
 
     render() {
         let {text} = this.state;
+        if (this.props.clients != null)
         return (
             <div className="left floated">
                 <Search search={this.search}/>
@@ -39,6 +58,12 @@ class ClientList extends Component {
                 </List>
             </div>
         )
+        else
+            return (
+                <div className="left floated">
+                    Loading...
+                </div>
+            )
     }
 }
 
@@ -53,7 +78,7 @@ function mapStateToProps(state){
 }
 
 function matchDispatchToProps(dispatch){
-    return bindActionCreators({select:select}, dispatch)
+    return bindActionCreators({select:select, httpGet:httpGet}, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(ClientList);

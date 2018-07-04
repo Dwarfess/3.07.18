@@ -1,10 +1,10 @@
-
 import {combineReducers} from 'redux';
 import ActiveClient from './client-active';
-import ClientsReducers from './clients.json';
+// import ClientsReducers from './clients.json';
+import GetClients from './get-clients';
 
 const allReducers = combineReducers({
-    clients: () => ClientsReducers,
+    clients: GetClients,
     active: ActiveClient
 });
 
